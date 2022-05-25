@@ -61,3 +61,25 @@ $ npm run test:cov
  npm run start:dev
 
 ```
+
+- add User Module
+
+
+```
+nest g module user
+
+```
+
+- add Movie Module
+
+```
+nest g module movie
+
+```
+
+- add Like Movie Module
+
+```
+nest g module likeMovie
+
+```

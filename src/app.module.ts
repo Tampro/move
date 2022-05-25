@@ -2,6 +2,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './user/user.module';
+import { MovieModule } from './movie/movie.module';
+import { LikeMovieModule } from './like-movie/like-movie.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -14,8 +17,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    UserModule,
+    MovieModule,
+    LikeMovieModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
