@@ -13,4 +13,8 @@ export class UserService {
     async save(body){
         return this.userRepository.save(body);
     }
+
+    async findOne(username){
+        return this.userRepository.findOne(username);
+    }
 }

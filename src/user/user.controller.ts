@@ -1,11 +1,14 @@
-import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Post, Res } from '@nestjs/common';
 import { UserService } from './user.service';
 import * as bcryptjs from 'bcryptjs';
+import { JwtService } from '@nestjs/jwt';
+import { Response } from 'express';
 @Controller('user')
 export class UserController {
 
     constructor(
-        private userService: UserService
+        private userService: UserService,
+        private jwtService: JwtService
     ){
     }
 
@@ -21,7 +24,36 @@ export class UserController {
     }
 
     @Post('login')
-    login(@Body() body: any){
-        return body;
+    async login(
+        @Body('username') username: string,
+        @Body('password') password: string,
+        @Res({passthrough: true}) response: Response
+    ){
+        const user = await this.userService.findOne({username});
+        if (!user) {
+            throw new BadRequestException("invalid credentials");
+        }
+
+        if (!await bcryptjs.compare(password, user.password)) {
+            throw new BadRequestException("invalid credentials");
+        }
+
+        const accessToken = await this.jwtService.signAsync({
+            id:user.id
+        },{expiresIn:'30s'});
+
+        const refreshToken = await this.jwtService.signAsync({
+            id: user.id
+        });
+
+        // set the cookie in 1 week
+        response.cookie('refreshToken',refreshToken,{
+            httpOnly:true,
+            maxAge: 7 * 24 * 60 * 60 * 1000 
+        })
+        
+        return {
+            token: accessToken
+        };
     }
 }

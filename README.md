@@ -126,3 +126,10 @@ nest g service user
 
 nest g service movie
 ```
+
+## Login 
+
+```
+  npm install --save @nestjs/jwt passport-jwt
+
+```
