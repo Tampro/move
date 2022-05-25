@@ -130,6 +130,7 @@ nest g service movie
 ## Login 
 
 ```
-  npm install --save @nestjs/jwt passport-jwt
-
+  npm i --save @nestjs/jwt passport-jwt
+  npm i cookie-parser
 ```
+
