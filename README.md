@@ -62,6 +62,8 @@ $ npm run test:cov
 
 ```
 
+## Entities
+
 - add User Module
 
 
@@ -81,5 +83,22 @@ nest g module movie
 
 ```
 nest g module likeMovie
+
+```
+
+## Controller
+
+- add User controller
+
+```
+nest g controller user
+
+```
+
+
+- add Movie controller
+
+```
+nest g controller movie
 
 ```
