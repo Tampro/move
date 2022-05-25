@@ -86,7 +86,7 @@ nest g module likeMovie
 
 ```
 
-## Controller
+## Controllers
 
 - add User controller
 
@@ -101,4 +101,28 @@ nest g controller user
 ```
 nest g controller movie
 
+```
+
+## Services
+
+- add User Service
+
+```
+nest g service user
+
+```
+
+-- add bcryptjs
+
+```
+  npm i bcryptjs
+  npm i -D @types/bcryptjs
+
+```
+
+- add Movie Service
+
+```
+
+nest g service movie
 ```

@@ -1,15 +1,28 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { MovieService } from './movie.service';
 
 @Controller('movie')
 export class MovieController {
 
-    @Post('share')
-    share(@Body() body: any){
-        return body;
+    constructor(
+        private movieService: MovieService
+    ){
     }
 
-    @Post('list')
-    list(@Body() body: any){
-        return body;
+    @Post('share')
+    async share(@Body() body: any){
+
+        return await this.movieService.save({
+            title:body.title,
+            description: body.description,
+            youtubeUrl: body.youtubeUrl,
+            userId: body.userId
+        });
+    }
+
+    @Get()
+    async findAll(){
+        const events = await this.movieService.getAll();
+        return events;
     }
 }

@@ -10,8 +10,11 @@ export class Movie {
   @Column()
   title : string;
 
-  @Column()
+  @Column("text")
   description: string;
+
+  @Column()
+  youtubeUrl: string;
 
   @ManyToOne(type => User, user => user.movies)
   user: User;
