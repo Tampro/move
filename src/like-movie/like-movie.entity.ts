@@ -1,9 +1,14 @@
-import { Movie } from 'src/movie/movie.entity';
-import { User } from 'src/user/user.entity';
+import { Movie } from '../movie/movie.entity';
+import { User } from '../user/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
 export class LikeMovie {
+  
+  constructor(partial?: Partial<LikeMovie>) {
+    Object.assign(this, partial);
+  }
+
   @PrimaryGeneratedColumn()
   id: number;
 

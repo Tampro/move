@@ -1,5 +1,5 @@
-import { LikeMovie } from 'src/like-movie/like-movie.entity';
-import { User } from 'src/user/user.entity';
+import { LikeMovie } from '../like-movie/like-movie.entity';
+import { User } from '../user/user.entity';
 import {
   Entity,
   Column,
@@ -11,6 +11,11 @@ import {
 
 @Entity()
 export class Movie {
+
+  constructor(partial?: Partial<Movie>) {
+    Object.assign(this, partial);
+  }
+
   @PrimaryGeneratedColumn()
   id: number;
 
