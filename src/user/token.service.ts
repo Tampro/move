@@ -14,8 +14,8 @@ export class TokenService {
          return this.tokenRepository.save(body);
      }
  
-     async findOne(username){
-         return this.tokenRepository.findOne(username);
+     async findOne(email){
+         return this.tokenRepository.findOne(email);
      }
 
      async delete(options){

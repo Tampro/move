@@ -22,26 +22,18 @@ export class UserController {
     private tokenService: TokenService,
   ) {}
 
-  @Post('register')
-  async register(@Body() body: any) {
-    if (body.password !== body.passwordConfirm) {
-      throw new BadRequestException('Password do not match');
-    }
-    return this.userService.save({
-      username: body.username,
-      password: await bcryptjs.hash(body.password, 12),
-    });
-  }
-
-  @Post('login')
+  @Post('login-or-register')
   async login(
-    @Body('username') username: string,
+    @Body('email') email: string,
     @Body('password') password: string,
     @Res({ passthrough: true }) response: Response,
   ) {
-    const user = await this.userService.findOne({ username });
+    let user = await this.userService.findOne({ email });
     if (!user) {
-      throw new BadRequestException('invalid credentials');
+        user =  await this.userService.save({
+            email: email,
+            password: await bcryptjs.hash(password, 12),
+        });
     }
 
     if (!(await bcryptjs.compare(password, user.password))) {
