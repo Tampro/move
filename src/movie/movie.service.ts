@@ -18,6 +18,7 @@ export class MovieService {
         return await this.movieRepository
         .createQueryBuilder('m')
         .leftJoinAndSelect('m.likeMovies', 'lm')
+        .innerJoinAndSelect('m.user', 'u')
         .orderBy('m.id', 'DESC')
         .getMany();
     }

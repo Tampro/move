@@ -11,11 +11,10 @@ export class MovieController {
 
     @Post('share')
     async share(@Body() body: any){
-
         return await this.movieService.save({
             title:body.title,
             description: body.description,
-            youtubeUrl: body.youtubeUrl,
+            youtubeId: body.youtubeId,
             userId: body.userId
         });
     }

@@ -14,6 +14,7 @@ import { LikeMovieModule } from './like-movie/like-movie.module';
       username: 'root',
       password: 'password',
       database: 'movie',
+      charset: 'utf8mb4_unicode_ci',
       autoLoadEntities: true,
       synchronize: true,
     }),

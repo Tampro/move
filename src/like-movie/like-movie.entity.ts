@@ -11,13 +11,13 @@ export class LikeMovie {
   like!: boolean;
 
   @Column()
-  userId!: number;
+  userId: number;
 
   @Column()
   movieId!: number;
 
   @ManyToOne(() => User, user => user.likeMovies)
-  user!: User;
+  user: User;
 
   @ManyToOne(() => Movie, movie => movie.likeMovies)
   movie!: Movie;
