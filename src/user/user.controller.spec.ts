@@ -15,6 +15,6 @@ describe('UserController', () => {
   // beforeAll(() => console.log('this logged once'));
   beforeEach(() => {
     userService = new UserService(userRepository);
-    userController = new UserController(userService,jwtService,tokenService);
+    userController = new UserController(userService, jwtService, tokenService);
   });
 });

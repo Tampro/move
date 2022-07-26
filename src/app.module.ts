@@ -1,22 +1,22 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { MovieModule } from './movie/movie.module';
 import { LikeMovieModule } from './like-movie/like-movie.module';
+import ormConfig from './config/orm.config';
+import ormConfigProd from './config/orm.config.prod';
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'password',
-      database: 'movie',
-      charset: 'utf8mb4_unicode_ci',
-      autoLoadEntities: true,
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [ormConfig],
+      expandVariables: true,
+      envFilePath: `${process.env.NODE_ENV}.env`
+    }),
+    TypeOrmModule.forRootAsync({
+      useFactory: process.env.NODE_ENV !== 'production'
+        ? ormConfig : ormConfigProd
     }),
     UserModule,
     MovieModule,
